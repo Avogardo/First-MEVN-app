@@ -25,6 +25,8 @@
       There are no posts.. Lets add one now <br /><br />
       <router-link v-bind:to="{ name: 'NewPost' }" class="add_post_link">Add Post</router-link>
     </div>
+
+    <button @click="onClick">Button</button>
   </div>
 </template>
 
@@ -49,6 +51,15 @@ export default {
       await PostsService.deletePost(id)
       this.getPosts()
       this.$router.push({ name: 'Posts' })
+    },
+    onClick () {
+      fetch('http://localhost:8081/posts')
+        .then((response) =>
+          response.json()
+        )
+        .then((myJson) => {
+          console.log(myJson)
+        })
     }
   }
 }
